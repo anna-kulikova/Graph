@@ -124,7 +124,6 @@ void D_heap::Heapify()
 }
 
 
-
 int D_heap::Min(int i, int j)
 {
 	int m;
@@ -153,6 +152,11 @@ void D_heap::Sort()
 	for (int i = heapsize - 1; i >= 0; i--)
 		RemoveMin();
 	heapsize = tmp;
+}
+
+int D_heap::GetSize() const
+{
+	return keysize;
 }
 
 int D_heap::operator==(const D_heap &heap) const
