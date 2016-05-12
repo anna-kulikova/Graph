@@ -25,8 +25,9 @@ public:
 	void PushKey(const KeyType &);
 	void Heapify(void);
 	int Min(int, int);
-	KeyType* GetKey(KeyType*& k) const;
+	KeyType D_heap::GetKey(int idx) const;
 	void Sort(void);
+	int GetSize(void) const;
 	int operator==(const D_heap &) const;
 	int operator!=(const D_heap &) const;
 	friend ostream& operator<<(ostream& out, const D_heap& heap)

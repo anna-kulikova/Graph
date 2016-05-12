@@ -138,12 +138,12 @@ int D_heap::Min(int i, int j)
 }
 
 
-KeyType* D_heap::GetKey(KeyType*& k) const
+KeyType D_heap::GetKey(int idx) const
 {
-	k = new KeyType[heapsize];
-	for (int i = 0; i < heapsize; i++)
-		k[i] = keys[i];
-	return k;
+	if ((idx >= keysize) || (idx < 0))
+		throw
+		exception("Out of range");
+	return keys[idx];
 }
 
 void D_heap::Sort()
