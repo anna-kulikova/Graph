@@ -28,6 +28,7 @@ public:
 	KeyType D_heap::GetKey(int idx) const;
 	void Sort(void);
 	int GetSize(void) const;
+	int getHeapSize(void)const {return heapsize;}
 	int operator==(const D_heap &) const;
 	int operator!=(const D_heap &) const;
 	friend ostream& operator<<(ostream& out, const D_heap& heap)
@@ -36,4 +37,5 @@ public:
 			out << heap.keys[i] << " ";
 		return out;
 	}
+
 };

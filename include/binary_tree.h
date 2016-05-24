@@ -13,6 +13,7 @@ struct Node
 	Node *right;
 };
 
+
 void WorkAroundDirect(Node * node);
 void WorkAroundReverse(Node *node);
 void WorkAroundSym(Node *node);
