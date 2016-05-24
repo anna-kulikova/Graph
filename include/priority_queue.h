@@ -1,28 +1,92 @@
 #pragma once
 #include <iostream>
+
 #include "d-heap.h"
+#include "binary_search_tree.h"
+#include "sort_table.h"
 
-class Priotity_Queue
-{
 
-	D_heap* heap;
+class priority_queue {
 public:
-	Priotity_Queue(int d = 3);
-	Priotity_Queue(const Priotity_Queue&);
-	~Priotity_Queue(void);
-	int GetSize(void) const;
-	D_heap GetHeap(void) const;
-	int  operator==(const Priotity_Queue&) const;
-	int  operator!=(const Priotity_Queue&) const;
-	int  IsEmpty(void) const;
-	int  IsFull(void) const;
-	void  Pop(void);
-	void  Push(const KeyType&);
-	KeyType Back(void) const;
-	friend std::ostream& operator<< (std::ostream& out, const Priotity_Queue& queue)
-	{
-		out << queue.heap;
-		return out;
-	}
+	virtual void push(const KeyType&);
+	virtual void pop(void);
+	virtual KeyType back(void)const;
+
+	virtual int isFull(void)const;
+	virtual int isEmpty(void)const;
 };
 
+class on_d_heap : public priority_queue {
+	D_heap* heap;
+public:
+	on_d_heap(size_t keysize, size_t d) {heap = new D_heap(keysize, d)};
+	on_d_heap(const on_d_heap& heap) { this->heap = new D_heap(*heap.heap);}
+	~on_d_heap(void) {delete heap;}
+
+	virtual void push(const KeyType& data) {
+		if (isFull()) throw("err"); // add an exception
+		heap->РushKey(data);}
+	virtual void pop(void) { 
+		if (isEmpty()) throw("err"); // add an exception
+		heap->RemoveMin();}
+	virtual KeyType back(void)const {
+		if (isEmpty()) throw("err"); //add an exception
+	 return heap->GetKey(0);}
+
+	virtual int isFull(void)const {return heap->GetSize() == heap->GetHeapSize();}
+	virtual int isEmpty(void)const {return heap->GetHeapSize() == 0;}
+};
+
+class on_table : public priority_queue {
+	SortTable* table;
+public:
+	on_table(size_t size) {table = new SortTable(size);}
+	on_table(const on_table& table) {this->table = new SortTable(*table.table);}
+	~on_table(void) {delete table;}
+
+	virtual void push(const KeyType& data) {
+		if (isFull()) throw("err"); // add an exception
+	 table->Push(data, NULL);}
+	virtual void pop(void) { 
+		if (isEmpty()) throw("err"); // add an exception
+		table->Remove(table->findMin()->GetKey());}
+	virtual KeyType back(void)const {
+		if (isEmpty()) throw("err"); // add an exception
+		return table->findMin()->GetKey();
+	}
+
+	virtual int isFull(void)const {return table->IsFull();}
+	virtual int isEmpty(void)const { return table->IsEmpty();}
+};
+
+class on_bst : public priority_queue{
+	bst* tree;
+public:
+	on_bst(void) {tree = new bst();}
+	on_bst(const on_bst& q) {tree = new bst(*q.tree);}
+	virtual void push(const KeyType& data) {
+		if (isFull()) thtow("err");
+		tree->Push(data);
+	}
+	virtual void pop(void) {
+		if (isEmpty()) throw("err");
+		tree->Remove(tree->FindMin()->key;)
+	}
+	virtual KeyType back(void)const {
+		if (isEmpty()) throw("err");
+		return tree->FindMin()->key;
+	}
+
+	virtual int isFull(void)const {
+		Node* tmp = new Node;
+		if (tmp == NULL)
+			return 1;
+		delete tmp;
+		return 0;
+	}
+	virtual int isEmpty(void)const {
+		if (tree == NULL)
+			throw("queue does not exist");
+		return tree->GetRoot() == NULL;
+	}
+};

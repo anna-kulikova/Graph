@@ -1,41 +1,62 @@
 #include "binary_search_tree.h"
 
-Node * FindKey(Node *root, int k)
+Node* bst:Copy(Node *node){
+	if (node == 0)
+		return 0;
+	Node *l = Copy(node->left);
+	Node *r = Copy(node->right);
+	Node *tmp = new Node;
+	tmp->key = node->key;
+	tmp->left = l;
+	tmp->right = r;
+	return tmp;
+}
+void bst:recursiveRemove(Node* node){
+	if (node == NULL) return;
+	recursiveRemove(node->left);
+	recursiveRemove(node->right);
+	delete node;
+}
+
+Node * bst:FindKey(int k)
 {
-	while ((root != 0) && (root->key != k))
+	Node* root1 = root;
+	while ((root1 != 0) && (root1->key != k))
 	{
-		if (k < root->key)
-			root = root->left;
+		if (k < root1->key)
+			root1 = root1->left;
 		else
-			root = root->right;
+			root1 = root1->right;
 	}
-	if (root == 0)
+	if (root1 == 0)
 		throw
 		exception("Node doesn't exist");
-	return root;
+	return root1;
 }
 
-Node * FindMin(Node *root)
+Node * bst:FindMin()
 {
-	if (root == 0)
+	Node* root1 = root;
+	if (root1 == 0)
 		throw
 		exception("Tree is empty");
-	while (root->left != 0)
-		root = root->left;
-	return root;
+	while (root1->left != 0)
+		root1 = root1->left;
+	return root1;
 }
 
-Node * FindMax(Node *root)
+Node * bst:FindMax()
 {
-	if (root == 0)
+	Node* root1 = root;
+	if (root1 == 0)
 		throw
 		exception("Tree is empty");
-	while (root->right != 0)
-		root = root->right;
-	return root;
+	while (root1->right != 0)
+		root1 = root1->right;
+	return root1;
 }
 
-Node * FindNext(Node *node)
+Node * bst:FindNext(Node *node)
 {
 	if (node == 0)
 		throw
@@ -50,7 +71,7 @@ Node * FindNext(Node *node)
 	return node->parent;
 }
 
-Node * FindPrevious(Node *node)
+Node * bst:FindPrevious(Node *node)
 {
 	if (node == 0)
 		throw
@@ -65,14 +86,15 @@ Node * FindPrevious(Node *node)
 	return node->parent;
 }
 
-void Push(Node *&root, Node *node)
+void bst:Push(Node *node)
 {
-	if (root == 0)
+	Node* root1 = root;
+	if (root1 == 0)
 	{
-		root = node;
+		root1 = node;
 		return;
 	}
-	Node *x = root;
+	Node *x = root1;
 	Node *y = new Node();
 	while (x != 0)
 	{
@@ -87,11 +109,13 @@ void Push(Node *&root, Node *node)
 	else
 		y->left = node;
 	node->parent = y;
+	root = root1;
 }
 
-void Remove(Node *&root, int k)
+void bst:Remove(int k)
 {
-	Node *x = FindKey(root, k);
+	Node* root1 = this->root;
+	Node *x = FindKey(root1, k);
 	if (x == 0)
 		return;
 	if ((x->right == 0) && (x->left == 0))
@@ -101,6 +125,7 @@ void Remove(Node *&root, int k)
 		else
 			x->parent->left = 0;
 		delete x;
+		root = root1;
 		return;
 	}
 	if ((x->right != 0) && (x->left == 0))
@@ -112,6 +137,7 @@ void Remove(Node *&root, int k)
 		else
 			x->parent->left = y;
 		delete x;
+		root = root1;
 		return;
 	}
 	if ((x->right == 0) && (x->left != 0))
@@ -123,16 +149,18 @@ void Remove(Node *&root, int k)
 		else
 			x->parent->right = y;
 		delete x;
+		root = root1;
 		return;
 	}
 	if ((x->right != 0) && (x->left != 0))
 	{
-		if (x == root) {
-			Node* y = root;
-			root = FindMin(x->right);
-			root->left = x->left;
-			root->right = x->right;
+		if (x == root1) {
+			Node* y = root1;
+			root1 = FindMin(x->right);
+			root1->left = x->left;
+			root1->right = x->right;
 			delete y;
+			root = root1;
 			return;
 		}
 		Node* y = x;
@@ -144,11 +172,11 @@ void Remove(Node *&root, int k)
 		}
 
 		delete y;
-		return;
+		root = root1;
 	}
 }
 
-void WorkAroundSearch(Node *node)
+void bst:WorkAroundSearch(Node *node)
 {
 	if (node == 0)
 		return;

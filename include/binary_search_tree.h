@@ -5,19 +5,34 @@
 
 using namespace std;
 
+typedef int KeyType;
 struct Node
 {
-	int key;
+	KeyType key;
 	Node *left;
 	Node *right;
 	Node *parent;
 };
 
-Node * FindKey(Node *root, int k);
-Node * FindMin(Node *root);
-Node * FindMax(Node *root);
-Node * FindNext(Node *node);
-Node * FindPrevious(Node *node);
-void Push(Node *&root, Node *node);
-void Remove(Node *&root, int k);
-void WorkAroundSearch(Node *node);
+class bst {
+	Node* root;
+	Node* Copy(Node *node);
+	void recursiveRemove(Node*);
+public:
+	bst() {}
+	bst(const bst& tree) { root = Copy(tree.root);}
+	~bst(void) { recursiveRemove(root);}
+
+	Node* GetRoot (void)const {return root;}
+	Node* FindKey(int k);
+	Node* FindMin();
+	Node* FindMax();
+	Node* FindNext(Node *node);
+	Node* FindPrevious(Node *node);
+
+	void Push(Node *node);
+	void Remove(KeyType k);
+	void WorkAroundSearch(Node *node);
+
+};
+
