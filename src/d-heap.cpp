@@ -63,12 +63,12 @@ void D_heap::SiftUp(int i)
 	if ((i >= heapsize) || (i < 0))
 		throw
 		exception("Out of borders");
-	int p = (i - 1) / d;
-	while (p > 0 && keys[p] > keys[i])
+	int p = i == 0 ? -1 : (i - 1) / d;
+	while (p != -1 && keys[p] > keys[i])
 	{
 		Swap(i, p);
 		i = p;
-		p = (i - 1) / d;
+		p = i == 0 ? -1 : (i - 1) / d;
 	}
 }
 
@@ -113,7 +113,8 @@ void D_heap::PushKey(const KeyType &k)
 	if (heapsize == keysize)
 		throw
 		exception("Array is full");
-	keys[heapsize++] = k;
+	heapsize++;
+	keys[heapsize - 1] = k;
 	SiftUp(heapsize - 1);
 }
 
@@ -126,16 +127,9 @@ void D_heap::Heapify()
 
 int D_heap::Min(int i, int j)
 {
-	int m;
-	for (int k = i; k < j; k++)
-	{
-		if (keys[k] < keys[k + 1])
-			m = k;
-		else
-			m = k + 1;
-	}
-	return m;
+	return (i < j) ? i : j;
 }
+
 
 
 KeyType D_heap::GetKey(int idx) const
@@ -146,6 +140,7 @@ KeyType D_heap::GetKey(int idx) const
 	return keys[idx];
 }
 
+// it's not a method of the class
 void D_heap::Sort()
 {
 	int tmp = heapsize;

@@ -48,7 +48,7 @@ TEST(SCANTABLE, can_create_table_by_size)
 
 TEST(SCANTABLE, can_create_table)
 {
-	ASSERT_NO_THROW(ScanTable *tab = new ScanTable());
+	ASSERT_NO_THROW(ScanTable *tab = new ScanTable(1));
 }
 
 TEST(SCANTABLE, can_copy_table)
@@ -59,7 +59,7 @@ TEST(SCANTABLE, can_copy_table)
 
 TEST(SCANTABLE, can_search)
 {
-	ScanTable *s = new ScanTable();
+	ScanTable *s = new ScanTable(3);
 	s->Push(1, "a");
 	s->Push(5, "b");
 	TabRecord* t;
@@ -74,7 +74,7 @@ TEST(SCANTABLE, can_push)
 
 TEST(SCANTABLE, can_remove)
 {
-	ScanTable *s = new ScanTable();
+	ScanTable *s = new ScanTable(3);
 	s->Push(1, "a");
 	s->Push(5, "b");
 	ASSERT_NO_THROW(s->Remove(1));
@@ -93,7 +93,7 @@ TEST(SORTTABLE, can_copy_table)
 
 TEST(SORTTABLE, can_search)
 {
-	SortTable *s = new SortTable(1);
+	SortTable *s = new SortTable(3);
 	s->Push(1, "a");
 	s->Push(5, "b");
 	TabRecord* t;
@@ -147,8 +147,8 @@ TEST(SCANTABLE, cant_create_table_with_invalid_argument)
 TEST(SCANTABLE, insert_increases_count)
 {
 	ScanTable s(3);
-	size_t expCount = s.GetCount() + 1;
 	s.Push(1, "b");
+	size_t expCount = s.GetCount() + 1;
 	s.Push(2, "a");
 	cout << expCount << " " << s.GetCount();
 	EXPECT_EQ(expCount, s.GetCount());
@@ -204,7 +204,7 @@ TEST(SCANTABLE, search_does_not_change_count)
 
 TEST(SCAN_TABLE, search_returns_0_if_record_does_not_exist)
 {
-	ScanTable s(3);
+	ScanTable s(4);
 	s.Push(1, "a");
 	s.Push(2, "b");
 	s.Push(3, "c");
@@ -221,62 +221,62 @@ TEST(SCANTABLE, copied_table_is_equal_to_source_one)
 	EXPECT_EQ(s.GetCount(), copyt.GetCount());
 }
 
-TEST(ARRAYHASHTABLE, can_create_table)
-{
-	ASSERT_NO_THROW(Table *ht = new ArrayHashTable(5, 2));
-}
-
-TEST(ARRAYHASHTABLE, can_search)
-{
-	ArrayHashTable *ht = new ArrayHashTable(5, 2);
-	ht->Push(1, "b");
-	ASSERT_NO_THROW(ht->Search(1));
-}
-
-TEST(ARRAYHASHTABLE, can_push)
-{
-	ArrayHashTable *ht = new ArrayHashTable(5, 2);
-	ASSERT_NO_THROW(ht->Push(1, "b"));
-}
-
-TEST(ARRAYHASHTABLE, can_remove)
-{
-	ArrayHashTable *ht = new ArrayHashTable(5, 2);
-	ht->Push(1, "b");
-	ASSERT_NO_THROW(ht->Remove(1));
-}
-
-TEST(ARRAYHASHTABLE, can_reset)
-{
-	ArrayHashTable *ht = new ArrayHashTable(5, 2);
-	ht->Push(1, "b");
-	ASSERT_NO_THROW(ht->Reset());
-}
-
-TEST(ARRAYHASHTABLE, can_get_next)
-{
-	ArrayHashTable *ht = new ArrayHashTable(5, 2);
-	ht->Push(1, "b");
-	ASSERT_NO_THROW(ht->GetNext());
-}
-
-TEST(ARRAYHASHTABLE, insert_increases_count)
-{
-	ArrayHashTable ht(3, 1);
-	size_t expCount = ht.GetCount() + 1;
-	ht.Push(1, "b");
-	EXPECT_EQ(expCount, ht.GetCount());
-}
-
-TEST(ARRAYHASHTABLE, remove_decreases_count)
-{
-	ArrayHashTable ht(3, 1);
-	ht.Push(1, "a");
-	ht.Push(2, "b");
-	ht.Push(3, "c");
-	size_t expCount = ht.GetCount() - 1;
-	ht.Remove(1);
-	EXPECT_EQ(expCount, ht.GetCount());
-}
-
-
+//TEST(ARRAYHASHTABLE, can_create_table)
+//{
+//	ASSERT_NO_THROW(Table *ht = new ArrayHashTable(5, 2));
+//}
+//
+//TEST(ARRAYHASHTABLE, can_search)
+//{
+//	ArrayHashTable *ht = new ArrayHashTable(5, 2);
+//	ht->Push(1, "b");
+//	ASSERT_NO_THROW(ht->Search(1));
+//}
+//
+//TEST(ARRAYHASHTABLE, can_push)
+//{
+//	ArrayHashTable *ht = new ArrayHashTable(5, 2);
+//	ASSERT_NO_THROW(ht->Push(1, "b"));
+//}
+//
+//TEST(ARRAYHASHTABLE, can_remove)
+//{
+//	ArrayHashTable *ht = new ArrayHashTable(5, 2);
+//	ht->Push(1, "b");
+//	ASSERT_NO_THROW(ht->Remove(1));
+//}
+//
+//TEST(ARRAYHASHTABLE, can_reset)
+//{
+//	ArrayHashTable *ht = new ArrayHashTable(5, 2);
+//	ht->Push(1, "b");
+//	ASSERT_NO_THROW(ht->Reset());
+//}
+//
+//TEST(ARRAYHASHTABLE, can_get_next)
+//{
+//	ArrayHashTable *ht = new ArrayHashTable(5, 2);
+//	ht->Push(1, "b");
+//	ASSERT_NO_THROW(ht->GetNext());
+//}
+//
+//TEST(ARRAYHASHTABLE, insert_increases_count)
+//{
+//	ArrayHashTable ht(3, 1);
+//	size_t expCount = ht.GetCount() + 1;
+//	ht.Push(1, "b");
+//	EXPECT_EQ(expCount, ht.GetCount());
+//}
+//
+//TEST(ARRAYHASHTABLE, remove_decreases_count)
+//{
+//	ArrayHashTable ht(3, 1);
+//	ht.Push(1, "a");
+//	ht.Push(2, "b");
+//	ht.Push(3, "c");
+//	size_t expCount = ht.GetCount() - 1;
+//	ht.Remove(1);
+//	EXPECT_EQ(expCount, ht.GetCount());
+//}
+//
+//

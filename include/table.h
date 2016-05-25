@@ -13,7 +13,6 @@ protected:
 	int count;
 	int pos;
 public:
-	Table() { cout << "Table::Table()" << endl; };
 	Table(int);
 	virtual TabRecord* Search(KeyType) = 0;
 	virtual void Push(KeyType, DataType*) = 0;

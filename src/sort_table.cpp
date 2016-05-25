@@ -6,14 +6,8 @@ SortTable::SortTable(int size) :ScanTable(size)
 {
 }
 
-SortTable::SortTable(const ScanTable &t)
+SortTable::SortTable(const ScanTable &t) : ScanTable(t)
 {
-	size = t.size;
-	count = t.count;
-	pos = 0;
-	recs = new TabRecord*[size];
-	for (int i = 0; i < count; i++)
-		recs[i] = new TabRecord(t.recs[i]->GetKey(), t.recs[i]->GetData());
 	SortData();
 }
 
@@ -35,7 +29,7 @@ TabRecord * SortTable::Search(KeyType key)
 			return recs[mid];
 		}
 	}
-	pos = right;
+	pos = left;
 	return 0;
 }
 

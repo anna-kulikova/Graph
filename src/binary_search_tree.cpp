@@ -1,6 +1,6 @@
 #include "binary_search_tree.h"
 
-Node* bst:Copy(Node *node){
+Node* bst::Copy(Node *node){
 	if (node == 0)
 		return 0;
 	Node *l = Copy(node->left);
@@ -11,52 +11,49 @@ Node* bst:Copy(Node *node){
 	tmp->right = r;
 	return tmp;
 }
-void bst:recursiveRemove(Node* node){
+void bst::recursiveRemove(Node* node){
 	if (node == NULL) return;
 	recursiveRemove(node->left);
 	recursiveRemove(node->right);
 	delete node;
 }
 
-Node * bst:FindKey(int k)
+Node * bst::FindKey(Node *root, int k)
 {
-	Node* root1 = root;
-	while ((root1 != 0) && (root1->key != k))
+	while ((root != 0) && (root->key != k))
 	{
-		if (k < root1->key)
-			root1 = root1->left;
+		if (k < root->key)
+			root = root->left;
 		else
-			root1 = root1->right;
+			root = root->right;
 	}
-	if (root1 == 0)
+	if (root == 0)
 		throw
 		exception("Node doesn't exist");
-	return root1;
+	return root;
 }
 
-Node * bst:FindMin()
+Node * bst::FindMin(Node *root)
 {
-	Node* root1 = root;
-	if (root1 == 0)
+	if (root == 0)
 		throw
 		exception("Tree is empty");
-	while (root1->left != 0)
-		root1 = root1->left;
-	return root1;
+	while (root->left != 0)
+		root = root->left;
+	return root;
 }
 
-Node * bst:FindMax()
+Node * bst::FindMax(Node *root)
 {
-	Node* root1 = root;
-	if (root1 == 0)
+	if (root == 0)
 		throw
 		exception("Tree is empty");
-	while (root1->right != 0)
-		root1 = root1->right;
-	return root1;
+	while (root->right != 0)
+		root = root->right;
+	return root;
 }
 
-Node * bst:FindNext(Node *node)
+Node * bst::FindNext(Node *node)
 {
 	if (node == 0)
 		throw
@@ -71,7 +68,7 @@ Node * bst:FindNext(Node *node)
 	return node->parent;
 }
 
-Node * bst:FindPrevious(Node *node)
+Node * bst::FindPrevious(Node *node)
 {
 	if (node == 0)
 		throw
@@ -86,7 +83,7 @@ Node * bst:FindPrevious(Node *node)
 	return node->parent;
 }
 
-void bst:Push(Node *node)
+void bst::Push(Node *node)
 {
 	Node* root1 = root;
 	if (root1 == 0)
@@ -112,7 +109,7 @@ void bst:Push(Node *node)
 	root = root1;
 }
 
-void bst:Remove(int k)
+void bst::Remove(KeyType k)
 {
 	Node* root1 = this->root;
 	Node *x = FindKey(root1, k);
@@ -176,7 +173,7 @@ void bst:Remove(int k)
 	}
 }
 
-void bst:WorkAroundSearch(Node *node)
+void bst::WorkAroundSearch(Node *node)
 {
 	if (node == 0)
 		return;

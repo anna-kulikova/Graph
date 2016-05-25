@@ -2,22 +2,21 @@
 
 Table::Table(int size)
 {
+	if (size < 0)
+		throw("Size can not be negative");
+	this->size = size;
 	count = 0;
 	pos = 0;
 }
 
 int Table::IsEmpty(void) const
 {
-	if (count == 0)
-		return 0;
-	return 1;
+	return count == 0;
 }
 
 int Table::IsFull(void) const
 {
-	if (count == size)
-		return 1;
-	return 0;
+	return count == size;
 }
 
 int Table::GetCount(void) const

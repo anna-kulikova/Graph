@@ -3,6 +3,8 @@
 ScanTable::ScanTable(int size) :Table(size)
 {
 	recs = new TabRecord*[size];
+	for (size_t i = 0; i < size; i++)
+		recs[i] = NULL;
 }
 
 ScanTable::~ScanTable()
@@ -34,6 +36,8 @@ void ScanTable::Push(KeyType key, DataType *data)
 
 void ScanTable::Remove(KeyType key)
 {
+	if (IsEmpty())
+		throw ("Table is empty");
 	if (!Search(key))
 		return;
 	delete recs[pos];

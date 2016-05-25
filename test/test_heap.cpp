@@ -35,7 +35,7 @@ TEST(D_HEAP, can_get_size_heap)
 TEST(D_HEAP, created_heap_is_empty)
 {
 	D_heap heap(5, 3);
-	EXPECT_EQ(0, heap.GetSize());
+	EXPECT_EQ(0, heap.GetHeapSize());
 }
 
 TEST(D_HEAP, compare_equal_heaps_return_true)
@@ -91,7 +91,6 @@ TEST(D_HEAP, can_swap_two_nodes)
 TEST(D_HEAP, throws_when_swap_with_negative_first_argument)
 {
 	D_heap heap(5, 3);
-	for (int i = 0; i < 5; i++)
 		for (int i = 0; i < 5; i++)
 			heap.PushKey(i);
 	ASSERT_ANY_THROW(heap.Swap(-4, 1));
@@ -100,7 +99,6 @@ TEST(D_HEAP, throws_when_swap_with_negative_first_argument)
 TEST(D_HEAP, throws_when_swap_with_negative_second_argument)
 {
 	D_heap heap(5, 3);
-	for (int i = 0; i < 5; i++)
 		for (int i = 0; i < 5; i++)
 			heap.PushKey(i);
 	ASSERT_ANY_THROW(heap.Swap(1, -4));
@@ -188,9 +186,9 @@ TEST(D_HEAP, can_insert)
 TEST(D_HEAP, insertion_increases_size)
 {
 	D_heap heap(5, 3);
-	int tmp = heap.GetSize();
+	int tmp = heap.GetHeapSize();
 	heap.PushKey(2);
-	EXPECT_EQ(tmp + 1, heap.GetSize());
+	EXPECT_EQ(tmp + 1, heap.GetHeapSize());
 }
 
 
@@ -207,9 +205,9 @@ TEST(D_HEAP, removing_min_decreases_size)
 	D_heap heap(5, 3);
 	for (int i = 0; i < 5; i++)
 		heap.PushKey(i);
-	int tmp = heap.GetSize();
+	int tmp = heap.GetHeapSize();
 	heap.RemoveMin();
-	EXPECT_EQ(tmp - 1, heap.GetSize());
+	EXPECT_EQ(tmp - 1, heap.GetHeapSize());
 }
 
 TEST(D_HEAP, cant_remove_min_from_empty_heap)
@@ -232,9 +230,9 @@ TEST(D_HEAP, removing_element_decreases_size)
 	D_heap heap(5, 3);
 	for (int i = 0; i < 5; i++)
 		heap.PushKey(i);
-	int tmp = heap.GetSize();
+	int tmp = heap.GetHeapSize();
 	heap.RemoveInd(1);
-	EXPECT_EQ(tmp - 1, heap.GetSize());
+	EXPECT_EQ(tmp - 1, heap.GetHeapSize());
 }
 
 TEST(D_HEAP, cant_remove_element_from_empty_heap)
@@ -266,9 +264,9 @@ TEST(D_HEAP, swap_does_not_change_size)
 	D_heap heap(5, 3);
 	for (int i = 0; i < 5; i++)
 		heap.PushKey(i);
-	int tmp = heap.GetSize();
+	int tmp = heap.GetHeapSize();
 	heap.Swap(0, 2);
-	EXPECT_EQ(tmp, heap.GetSize());
+	EXPECT_EQ(tmp, heap.GetHeapSize());
 }
 
 TEST(D_HEAP, SiftUp_does_not_change_size)
@@ -276,10 +274,10 @@ TEST(D_HEAP, SiftUp_does_not_change_size)
 	D_heap heap(5, 3);
 	for (int i = 0; i < 5; i++)
 		heap.PushKey(i);
-	int tmp = heap.GetSize();
+	int tmp = heap.GetHeapSize();
 	heap.Swap(0, 2);
-	heap.SiftUp(9);
-	EXPECT_EQ(tmp, heap.GetSize());
+	heap.SiftUp(4);
+	EXPECT_EQ(tmp, heap.GetHeapSize());
 }
 
 TEST(D_HEAP, SiftDown_does_not_change_size)
@@ -287,10 +285,10 @@ TEST(D_HEAP, SiftDown_does_not_change_size)
 	D_heap heap(5, 3);
 	for (int i = 0; i < 5; i++)
 		heap.PushKey(i);
-	int tmp = heap.GetSize();
+	int tmp = heap.GetHeapSize();
 	heap.Swap(0, 2);
 	heap.SiftDown(0);
-	EXPECT_EQ(tmp, heap.GetSize());
+	EXPECT_EQ(tmp, heap.GetHeapSize());
 }
 
 TEST(D_HEAP, heapify_does_not_change_size)
@@ -298,8 +296,8 @@ TEST(D_HEAP, heapify_does_not_change_size)
 	D_heap heap(5, 3);
 	for (int i = 0; i < 5; i++)
 		heap.PushKey(i);
-	int tmp = heap.GetSize();
+	int tmp = heap.GetHeapSize();
 	heap.Swap(0, 2);
 	heap.Heapify();
-	EXPECT_EQ(tmp, heap.GetSize());
+	EXPECT_EQ(tmp, heap.GetHeapSize());
 }
