@@ -1,193 +1,261 @@
 #include "binary_search_tree.h"
 
-Node* bst::Copy(Node *node){
-	if (node == 0)
-		return 0;
-	Node *l = Copy(node->left);
-	Node *r = Copy(node->right);
-	Node *tmp = new Node;
-	tmp->key = node->key;
-	tmp->left = l;
-	tmp->right = r;
-	return tmp;
-}
-void bst::recursiveRemove(Node* node){
-	if (node == NULL) return;
-	recursiveRemove(node->left);
-	recursiveRemove(node->right);
-	delete node;
+
+bst::bst()
+{
+	root = NULL;
+	size = 0;
+};
+
+
+bst::bst(const bst  &tree)
+{
+	root = Copy(tree.root);
+	size = tree.size;
+};
+
+
+bst ::~bst()
+{
+	delete root;
+};
+
+
+Node * bst::Copy(Node  *root1)
+{
+	if (root1 == NULL)
+		return NULL;
+	Node * l = Copy(root1->left);
+	Node * r = Copy(root1->right);
+	Node * tr = new Node;
+	tr->key = root1->key;
+	tr->left = l;
+	tr->right = r;
+	root = tr;
+	return tr;
+};
+
+
+int bst::GetSize()
+{
+	return size;
 }
 
-Node * bst::FindKey(Node *root, int k)
+
+void bst::Push(Node * &tr, const Node  *node)
 {
-	while ((root != 0) && (root->key != k))
+	KeyType tree = node->key;
+	if (tr == NULL)
 	{
-		if (k < root->key)
-			root = root->left;
-		else
-			root = root->right;
-	}
-	if (root == 0)
-		throw
-		exception("Node doesn't exist");
-	return root;
-}
-
-Node * bst::FindMin(Node *root)
-{
-	if (root == 0)
-		throw
-		exception("Tree is empty");
-	while (root->left != 0)
-		root = root->left;
-	return root;
-}
-
-Node * bst::FindMax(Node *root)
-{
-	if (root == 0)
-		throw
-		exception("Tree is empty");
-	while (root->right != 0)
-		root = root->right;
-	return root;
-}
-
-Node * bst::FindNext(Node *node)
-{
-	if (node == 0)
-		throw
-		exception("Tree is empty");
-	if (node->right != 0)
-		return FindMin(node->right);
-	while ((node->parent != 0) && (node->parent->right == node))
-		node = node->parent;
-	if (node->parent == 0)
-		throw
-		exception("Next node doesn't exist");
-	return node->parent;
-}
-
-Node * bst::FindPrevious(Node *node)
-{
-	if (node == 0)
-		throw
-		exception("Tree is empty");
-	if (node->right != 0)
-		return FindMax(node->left);
-	while ((node->parent != 0) && (node->parent->left == node))
-		node = node->parent;
-	if (node->parent == 0)
-		throw
-		exception("Previous node doesn't exist");
-	return node->parent;
-}
-
-void bst::Push(Node *node)
-{
-	Node* root1 = root;
-	if (root1 == 0)
-	{
-		root1 = node;
+		tr = new Node;
+		tr->key = tree;
+		size++;
 		return;
 	}
-	Node *x = root1;
-	Node *y = new Node();
-	while (x != 0)
+	Node * tmp = tr;
+	Node * prev = new Node;
+	while (tmp != NULL)
 	{
-		y = x;
-		if (x->key <= node->key)
-			x = x->right;
+		prev = tmp;
+		if (tmp->key <= tree)
+			tmp = tmp->right;
 		else
-			x = x->left;
+			tmp = tmp->left;
 	}
-	if (y->key <= node->key)
-		y->right = node;
-	else
-		y->left = node;
-	node->parent = y;
-	root = root1;
-}
+	if (prev->key <= tree)
+		prev->right = new Node(tree);
+	else prev->left = new Node(tree);
+	size++;
+};
 
-void bst::Remove(KeyType k)
+
+void bst::Remove(Node *& tr, const KeyType &k)
 {
-	Node* root1 = this->root;
-	Node *x = FindKey(root1, k);
-	if (x == 0)
+	Node * x = FindKey(tr, k);
+	if (x == NULL)
 		return;
-	if ((x->right == 0) && (x->left == 0))
+	if ((x->left == NULL) && (x->right == NULL))
 	{
-		if (x->parent->right == x)
-			x->parent->right = 0;
-		else
-			x->parent->left = 0;
 		delete x;
-		root = root1;
 		return;
-	}
-	if ((x->right != 0) && (x->left == 0))
+	};
+	if ((x->left == NULL) && (x->right != NULL))
 	{
-		Node *y = x->right;
+		Node * y = x->right;
 		y->parent = x->parent;
-		if (x->parent->right == x)
-			x->parent->right = y;
-		else
-			x->parent->left = y;
-		delete x;
-		root = root1;
-		return;
-	}
-	if ((x->right == 0) && (x->left != 0))
-	{
-		Node *y = x->left;
-		y->parent = x->parent;
-		if (x->parent->left == x)
-			x->parent->left = y;
-		else
-			x->parent->right = y;
-		delete x;
-		root = root1;
-		return;
-	}
-	if ((x->right != 0) && (x->left != 0))
-	{
-		if (x == root1) {
-			Node* y = root1;
-			root1 = FindMin(x->right);
-			root1->left = x->left;
-			root1->right = x->right;
-			delete y;
-			root = root1;
+		if (x->parent == NULL)
+		{
+			tr = y;
 			return;
 		}
-		Node* y = x;
-		if (x->parent->left == x) {
-			x->parent->left = FindMin(x->right);
-		}
-		else {
-			x->parent->right = FindMin(x->right);
-		}
-
-		delete y;
-		root = root1;
+		if (x->parent->right == x)
+			x->parent->right = y;
+		else
+			x->parent->left = y;
+		tr = y;
+		return;
 	}
+	if ((x->left != NULL) && (x->right == NULL))
+	{
+		Node * y = x->left;
+		y->parent = x->parent;
+		if (x->parent->right == x)
+			x->parent->right = y;
+		else
+			x->parent->left = y;
+		delete x;
+		return;
+	}
+	Node * y = FindMin(x->right);
+	x->key = y->key;
+	y->parent->left = y->right;
+	if (y->right != NULL)
+		y->right->parent = y->parent;
+	delete y;
+};
+
+
+Node * bst::FindKey(Node  *tr, const KeyType &k)
+{
+	while ((tr != NULL) && (tr->key != k))
+	{
+		if (k < tr->key)
+			tr = tr->left;
+		if (k > tr->key)
+			tr = tr->right;
+	}
+	if (tr == NULL)
+		return NULL;
+	return tr;
+};
+
+
+Node * bst::FindMin(Node  *tr)
+{
+	if (tr == NULL)
+		throw
+		exception("Tree is empty");
+	while (tr->left != NULL)
+		tr = tr->left;
+	return tr;
+};
+
+
+Node * bst::FindMax(Node  *tr)
+{
+	if (tr == NULL)
+		throw
+		exception("Tree is empty");
+	while (tr->right != NULL)
+		tr = tr->right;
+	return tr;
+};
+
+
+Node * bst::FindNext(Node  *tr, Node  *node)
+{
+	if (tr == NULL)
+		throw
+		exception("Tree is empty");
+	if (node == NULL)
+		throw
+		exception("Node is empty");
+	node = FindKey(tr, node->key);
+	if (node->right != NULL)
+		return FindMin(node->right);
+	while ((node->parent != NULL) && (node->parent->right == node))
+		node = node->parent;
+	if (node->parent == NULL)
+		throw
+		exception("Parent doesn't exist");
+	return node->parent;
+};
+
+
+Node * bst::FindPrevious(Node  *tr, Node  *node)
+{
+	if (tr == NULL)
+		throw
+		exception("Tree is empty");
+	if (node == NULL)
+		throw
+		exception("Node is empty");
+	node = FindKey(tr, node->key);
+	if (node->right != NULL)
+		return FindMax(node->left);
+	while ((node->parent != NULL) && (node->parent->left == node))
+		node = node->parent;
+	if (node->parent == NULL)
+		throw
+		exception("Parent doesn't exist");
+	return node->parent;
 }
 
-void bst::WorkAroundSearch(Node *node)
+
+
+int bst ::operator==(const bst & a)const
 {
-	if (node == 0)
-		return;
-	queue<Node*> q;
-	q.push(node);
-	while (!q.empty())
+	if ((root == NULL) && (a.root == NULL))
+		return 1;
+	if (size != a.size)
+		return 0;
+	int *z = new int[size];
+	int *b = new int[a.size];
+	queue <Node *> q;
+	queue <Node *> p;
+	q.push(root);
+	int tmp1 = 0, tmp2 = 0;
+	while (q.empty() == 0)
 	{
-		Node *tmp = q.front();
-		cout << tmp->key << " ";
+		Node * tmp = q.front();
+		z[tmp1] = tmp->key;
 		q.pop();
-		if (tmp->left != 0)
+		if (tmp->left != NULL)
 			q.push(tmp->left);
-		if (tmp->right != 0)
+		if (tmp->right != NULL)
 			q.push(tmp->right);
+		tmp1++;
 	}
+	p.push(a.root);
+	while (p.empty() == 0)
+	{
+		Node * tmp3 = p.front();
+		b[tmp2] = tmp3->key;
+		p.pop();
+		if (tmp3->left != NULL)
+			p.push(tmp3->left);
+		if (tmp3->right != NULL)
+			p.push(tmp3->right);
+		tmp2++;
+	}
+	for (int i = 0; i<size; i++)
+		if (z[i] != b[i])
+			return 0;
+	return 1;
+}
+
+
+
+
+int bst::GetHeight(Node  *tr)
+{
+	if (tr == NULL)
+		return 0;
+
+	int l, r;
+	if (tr->left != NULL)
+	{
+		l = GetHeight(tr->left);
+	}
+	else
+		l = -1;
+	if (tr->right != NULL)
+	{
+		r = GetHeight(tr->right);
+	}
+	else
+		r = -1;
+	int max = l > r ? l : r;
+	return max + 1;
 }
 

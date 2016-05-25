@@ -1,42 +1,54 @@
 #include "table.h"
 
-Table::Table(int size)
+
+Table::Table(KeyType a)
 {
-	if (size < 0)
-		throw("Size can not be negative");
-	this->size = size;
+	size = a;
 	count = 0;
 	pos = 0;
 }
 
-int Table::IsEmpty(void) const
+
+int Table::IsEmpty()
 {
-	return count == 0;
+	if (count == 0)
+		return 1;
+	return 0;
 }
 
-int Table::IsFull(void) const
+
+int Table::IsFull()
 {
-	return count == size;
+	if (count == size)
+		return 1;
+	return 0;
 }
 
-int Table::GetCount(void) const
+
+int Table::GetCount()
 {
 	return count;
 }
 
-void Table::Reset(void)
+
+void Table::Reset()
 {
 	pos = 0;
 }
 
-int Table::GetNext(void)
+
+int Table::GoNext()
 {
-	if (IsTabEnded())
+	if (!IsTabEnded())
+	{
+		pos++;
 		return 1;
-	pos++;
+	}
+	return 0;
 }
 
-int Table::IsTabEnded(void) const
+
+int Table::IsTabEnded()
 {
 	if (pos == count)
 		return 1;

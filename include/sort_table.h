@@ -4,14 +4,27 @@
 
 using namespace std;
 
-class SortTable :public ScanTable
+
+class SortTable : public ScanTable
 {
 public:
-	SortTable(int);
-	SortTable(const ScanTable &);
-	virtual TabRecord* Search(KeyType);
-	TabRecord* findMin(void) {return count == 0 ? NULL : recs[0];}
-	virtual void Push(KeyType, DataType*);
-	virtual void Remove(KeyType);
-	void SortData();
+	SortTable(int size) : ScanTable(size) {};
+	SortTable(ScanTable& table) : ScanTable(table)
+	{ 
+		Sort();
+	}
+	virtual ~SortTable()
+	{
+		for (int i = 0; i < size; i++)
+			delete recs[i];
+		delete[]recs;
+	}
+
+	virtual TabRecord* FindKey(KeyType key);
+	virtual void Push(KeyType k, DataType Data);
+	virtual void Remove(KeyType k);
+	void Sort();
+	TabRecord* Min();
 };
+
+

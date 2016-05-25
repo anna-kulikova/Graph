@@ -1,47 +1,70 @@
 #include "scan_table.h"
 
-ScanTable::ScanTable(int size) :Table(size)
-{
-	recs = new TabRecord*[size];
-	for (size_t i = 0; i < size; i++)
-		recs[i] = NULL;
-}
+
 
 ScanTable::~ScanTable()
 {
+	for (int i = 0; i < size; i++)
+		delete recs[i];
 	delete[]recs;
 }
 
-TabRecord * ScanTable::Search(KeyType key)
+
+TabRecord * ScanTable::FindKey(KeyType k)
 {
 	for (int i = 0; i < count; i++)
-		if (key == recs[i]->GetKey())
+		if (k == recs[i]->GetKey())
 		{
 			pos = i;
 			return recs[i];
 		}
-	return 0;
-}
+	return NULL;
+};
 
-void ScanTable::Push(KeyType key, DataType *data)
+void ScanTable::Push(KeyType k, DataType Data)
 {
 	if (IsFull())
-	{
-		throw ("Table is empty");
-		return;
-	}
-	recs[count] = new TabRecord(key, data);
+		throw
+		exception("Table is full");
+	recs[count] = new TabRecord(k, Data);
 	count++;
 }
 
-void ScanTable::Remove(KeyType key)
+void ScanTable::Remove(KeyType k)
 {
 	if (IsEmpty())
-		throw ("Table is empty");
-	if (!Search(key))
-		return;
+		//return;
+		throw
+		exception("Table is empty");
+	if (FindKey(k) == NULL)
+		//return;
+		throw
+		exception("Record doesn't exist");
 	delete recs[pos];
 	recs[pos] = recs[count - 1];
 	count--;
 }
+void ScanTable::Print()
+{
+	for (int i = 0; i < count; i++)
+	{
+		cout << recs[i]->GetKey() << " " << recs[i]->GetData() << endl;
+	}
+}
 
+int ScanTable::GetCount()
+{
+	return count;
+};
+
+
+int ScanTable::GetSize()
+{
+	return size;
+}
+
+
+TabRecord** ScanTable::GetRecs()
+{
+	return recs;
+}

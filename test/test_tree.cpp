@@ -1,369 +1,228 @@
-#include "Binary_Search_Tree.h"
-#include "gtest.h"
+#include <gtest.h>
+#include "binary_search_tree.h"
 
 
-TEST(BINARY_SEARCH_TREE, can_create_tree)
+TEST(bst, can_create_tree)
 {
-	ASSERT_NO_THROW(Node *root = new Node);
+	ASSERT_NO_THROW(bst *tree = new bst());
 }
 
-TEST(BINARY_SEARCH_TREE, can_find_node_by_key)
+TEST(bst, can_copy_tree)
 {
-	Node *n = new Node();
-	bst root;
-	n->parent = 0;
-	n->key = 10;
-	Node *n1 = new Node();
-	n1->key = 5;
-	root.Push(n1);
-	Node *n2 = new Node();
-	n2->key = 15;
-	root.Push(n2);
-	n1->left = 0;
-	n1->right = 0;
-	n2->left = 0;
-	n2->right = 0;
-	Node *findnode = new Node;
-	ASSERT_NO_THROW(findnode = root.FindKey(n, 15));
+	bst *tree = new bst();
+	Node *copytree = new Node();
+	copytree->key = 6;
+	tree->Push(tree->root, copytree);
+	ASSERT_NO_THROW(bst *copytree = new bst(*tree));
 }
 
-TEST(BINARY_SEARCH_TREE, find_node_by_key_correctly)
+TEST(bst, copied_tree_is_equal_to_source_one)
 {
-	Node *n = new Node();
-	bst root;
-	n->parent = 0;
-	n->key = 10;
-	Node *n1 = new Node();
-	n1->key = 5;
-	root.Push(n1);
-	Node *n2 = new Node();
-	n2->key = 15;
-	root.Push(n2);
-	n1->left = 0;
-	n1->right = 0;
-	n2->left = 0;
-	n2->right = 0;
-	Node *findnode = root.FindKey(n, 5);
-	Node *node = n1;
-	EXPECT_EQ(node, findnode);
+	bst *a = new bst();
+	Node *b = new Node();
+	b->key = 6;
+	a->Push(a->root, b);
+	b->key = 2;
+	a->Push(a->root, b);
+	bst *c = new bst(*a);
+	int d = a->operator==(*c);
+	EXPECT_EQ(d, 1);
 }
 
-TEST(BINARY_SEARCH_TREE, can_find_min)
+TEST(bst, FindKey_works_properly)
 {
-	Node *n = new Node();
-	bst root;
-	n->parent = 0;
-	n->key = 10;
-	Node *n1 = new Node();
-	n1->key = 5;
-	root.Push(n1);
-	Node *n2 = new Node();
-	n2->key = 15;
-	root.Push(n2);
-	n1->left = 0;
-	n1->right = 0;
-	n2->left = 0;
-	n2->right = 0;
-	Node *min = new Node;
-	ASSERT_NO_THROW(min = root.FindMin(n));
+	bst *a = new bst();
+	Node *b = new Node();
+	b->key = 6;
+	a->Push(a->root, b);
+	b->key = 2;
+	a->Push(a->root, b);
+	b->key = 8;
+	a->Push(a->root, b);
+	b->key = 0;
+	a->Push(a->root, b);
+	b = a->FindKey(a->root, 2);
+	EXPECT_EQ(b->key, 2);
 }
 
-TEST(BINARY_SEARCH_TREE, find_min_correctly)
+TEST(bst, FindMin_works_properly)
 {
-	Node *n = new Node();
-	bst root;
-	n->parent = 0;
-	n->key = 10;
-	Node *n1 = new Node();
-	n1->key = 5;
-	root.Push(n1);
-	Node *n2 = new Node();
-	n2->key = 15;
-	root.Push(n2);
-	n1->left = 0;
-	n1->right = 0;
-	n2->left = 0;
-	n2->right = 0;
-	Node *min = root.FindMin(n);
-	Node *node = n1;
-	EXPECT_EQ(node, min);
+	bst *a = new bst();
+	Node *b = new Node();
+	b->key = 9;
+	a->Push(a->root, b);
+	b->key = 6;
+	a->Push(a->root, b);
+	b->key = 8;
+	a->Push(a->root, b);
+	b->key = 2;
+	a->Push(a->root, b);
+	b->key = 4;
+	a->Push(a->root, b);
+	b->key = 0;
+	a->Push(a->root, b);
+	b->key = 5;
+	a->Push(a->root, b);
+	b->key = 1;
+	a->Push(a->root, b);
+	b->key = 7;
+	a->Push(a->root, b);
+	Node *c = a->FindMin(a->root);
+	EXPECT_EQ(c->key, 0);
 }
 
-TEST(BINARY_SEARCH_TREE, can_find_max)
+TEST(bst, throws_when_FindMin_from_empty_tree)
 {
-	Node *n = new Node();
-	bst root;
-	n->parent = 0;
-	n->key = 10;
-	Node *n1 = new Node();
-	n1->key = 5;
-	root.Push(n1);
-	Node *n2 = new Node();
-	n2->key = 15;
-	root.Push(n2);
-	n1->left = 0;
-	n1->right = 0;
-	n2->left = 0;
-	n2->right = 0;
-	Node *max = new Node;
-	ASSERT_NO_THROW(max = root.FindMax(n));
+	bst *a = new bst();
+	ASSERT_ANY_THROW(a->FindMin(a->root));
 }
 
-TEST(BINARY_SEARCH_TREE, find_max_correctly)
+TEST(bst, FindMax_works_properly)
 {
-	Node *n = new Node();
-	bst root;
-	n->parent = 0;
-	n->key = 10;
-	Node *n1 = new Node();
-	n1->key = 5;
-	root.Push(n1);
-	Node *n2 = new Node();
-	n2->key = 15;
-	root.Push(n2);
-	n1->left = 0;
-	n1->right = 0;
-	n2->left = 0;
-	n2->right = 0;
-	Node *max = root.FindMax(n);
-	Node *node = n2;
-	EXPECT_EQ(node, max);
+	bst *a = new bst();
+	Node *b = new Node();
+	b->key = 9;
+	a->Push(a->root, b);
+	b->key = 6;
+	a->Push(a->root, b);
+	b->key = 8;
+	a->Push(a->root, b);
+	b->key = 2;
+	a->Push(a->root, b);
+	b->key = 4;
+	a->Push(a->root, b);
+	b->key = 0;
+	a->Push(a->root, b);
+	b->key = 5;
+	a->Push(a->root, b);
+	b->key = 1;
+	a->Push(a->root, b);
+	b->key = 7;
+	a->Push(a->root, b);
+	Node *c = a->FindMax(a->root);
+	EXPECT_EQ(c->key, 9);
 }
 
-TEST(BINARY_SEARCH_TREE, can_find_next_node)
+TEST(bst, throws_when_FindMax_from_empty_tree)
 {
-	Node *n = new Node();
-	bst root;
-	n->parent = 0;
-	n->key = 10;
-	Node *n1 = new Node();
-	n1->key = 5;
-	root.Push(n1);
-	Node *n2 = new Node();
-	n2->key = 15;
-	root.Push(n2);
-	n1->left = 0;
-	n1->right = 0;
-	n2->left = 0;
-	n2->right = 0;
-	Node *findnode = new Node;
-	ASSERT_NO_THROW(findnode = root.FindNext(n));
+	bst *a = new bst();
+	ASSERT_ANY_THROW(a->FindMax(a->root));
 }
 
-TEST(BINARY_SEARCH_TREE, find_next_node_correctly)
+TEST(bst, FindNext_works_properly)
 {
-	Node *n = new Node();
-	bst root;
-	n->parent = 0;
-	n->key = 10;
-	Node *n1 = new Node();
-	n1->key = 5;
-	root.Push(n1);
-	Node *n2 = new Node();
-	n2->key = 15;
-	root.Push(n2);
-	n1->left = 0;
-	n1->right = 0;
-	n2->left = 0;
-	n2->right = 0;
-	Node *findnode = root.FindNext(n);
-	Node *node = n2;
-	EXPECT_EQ(node, findnode);
+	bst *a = new bst();
+	Node *b = new Node();
+	b->key = 9;
+	a->Push(a->root, b);
+	b->key = 6;
+	a->Push(a->root, b);
+	b->key = 8;
+	a->Push(a->root, b);
+	b->key = 2;
+	a->Push(a->root, b);
+	b->key = 4;
+	a->Push(a->root, b);
+	b->key = 0;
+	a->Push(a->root, b);
+	b->key = 5;
+	a->Push(a->root, b);
+	b->key = 1;
+	a->Push(a->root, b);
+	b->key = 7;
+	a->Push(a->root, b);
+	b->key = 6;
+	Node *c = a->FindNext(a->root, b);
+	EXPECT_EQ(c->key, 7);
 }
 
-TEST(BINARY_SEARCH_TREE, can_find_previous_node)
+TEST(bst, can_find_previous)
 {
-	Node *n = new Node();
-	bst root;
-	n->parent = 0;
-	n->key = 10;
-	Node *n1 = new Node();
-	n1->key = 5;
-	root.Push(n1);
-	Node *n2 = new Node();
-	n2->key = 15;
-	root.Push(n2);
-	n1->left = 0;
-	n1->right = 0;
-	n2->left = 0;
-	n2->right = 0;
-	Node *findnode = new Node;
-	ASSERT_NO_THROW(findnode = root.FindPrevious(n));
+	bst *a = new bst();
+	Node *b = new Node();
+	b->key = 9;
+	a->Push(a->root, b);
+	b->key = 6;
+	a->Push(a->root, b);
+	b->key = 8;
+	a->Push(a->root, b);
+	b->key = 2;
+	a->Push(a->root, b);
+	b->key = 4;
+	a->Push(a->root, b);
+	b->key = 0;
+	a->Push(a->root, b);
+	b->key = 5;
+	a->Push(a->root, b);
+	b->key = 1;
+	a->Push(a->root, b);
+	b->key = 7;
+	a->Push(a->root, b);
+	b->key = 6;
+	Node *c = a->FindPrevious(a->root, b);
+	EXPECT_EQ(c->key, 5);
 }
 
-TEST(BINARY_SEARCH_TREE, find_previous_node_correctly)
+TEST(bst, GetSize_works_properly)
 {
-	Node *n = new Node();
-	bst root;
-	n->parent = 0;
-	n->key = 10;
-	Node *n1 = new Node();
-	n1->key = 5;
-	root.Push(n1);
-	Node *n2 = new Node();
-	n2->key = 15;
-	root.Push(n2);
-	n1->left = 0;
-	n1->right = 0;
-	n2->left = 0;
-	n2->right = 0;
-	Node *findnode = root.FindPrevious(n2);
-	cout << findnode->key;
-	Node *node = n;
-	cout << node->key;
-	EXPECT_EQ(node, findnode);
+	bst *a = new bst();
+	Node *b = new Node();
+	b->key = 9;
+	a->Push(a->root, b);
+	b->key = 6;
+	a->Push(a->root, b);
+	b->key = 8;
+	a->Push(a->root, b);
+	b->key = 2;
+	a->Push(a->root, b);
+	b->key = 4;
+	a->Push(a->root, b);
+	b->key = 0;
+	a->Push(a->root, b);
+	b->key = 5;
+	a->Push(a->root, b);
+	b->key = 1;
+	a->Push(a->root, b);
+	b->key = 7;
+	a->Push(a->root, b);
+	EXPECT_EQ(a->GetSize(), 9);
 }
 
-TEST(BINARY_SEARCH_TREE, can_push_node)
+TEST(bst, GetHeight_works_properly)
 {
-	Node *n = new Node();
-	bst root;
-	n->parent = 0;
-	n->key = 10;
-	Node *n1 = new Node();
-	n1->key = 5;
-	root.Push(n1);
-	Node *n2 = new Node();
-	n2->key = 15;
-	root.Push(n2);
-	n1->left = 0;
-	n1->right = 0;
-	n2->left = 0;
-	n2->right = 0;
-	Node *node = new Node;
-	node->key = 18;
-	ASSERT_NO_THROW(root.Push(node));
+	bst *a = new bst();
+	Node *b = new Node();
+	b->key = 9;
+	a->Push(a->root, b);
+	b->key = 6;
+	a->Push(a->root, b);
+	b->key = 8;
+	a->Push(a->root, b);
+	b->key = 2;
+	a->Push(a->root, b);
+	b->key = 4;
+	a->Push(a->root, b);
+	b->key = 0;
+	a->Push(a->root, b);
+	b->key = 5;
+	a->Push(a->root, b);
+	b->key = 1;
+	a->Push(a->root, b);
+	b->key = 7;
+	a->Push(a->root, b);
+	EXPECT_EQ(a->GetHeight(a->root), 4);
 }
 
-TEST(BINARY_SEARCH_TREE, pushes_node_correctly)
+TEST(bst, throws_when_no_next)
 {
-	Node *n = new Node();
-	bst root;
-	n->parent = 0;
-	n->key = 10;
-	Node *n1 = new Node();
-	n1->key = 5;
-	root.Push(n1);
-	Node *n2 = new Node();
-	n2->key = 15;
-	root.Push(n2);
-	n1->left = 0;
-	n1->right = 0;
-	n2->left = 0;
-	n2->right = 0;
-	Node *node = new Node;
-	node->key = 18;
-	root.Push(node);
-	EXPECT_EQ(n2->right->key, node->key);
+	bst *a = new bst;
+	Node *b = new Node(1);
+	ASSERT_ANY_THROW(a->FindNext(a->root, b));
 }
 
-TEST(BINARY_SEARCH_TREE, throws_when_findnode_does_not_exist)
+TEST(bst, throws_when_no_previous)
 {
-	Node *n = new Node();
-	bst root;
-	n->parent = 0;
-	n->key = 10;
-	Node *n1 = new Node();
-	n1->key = 5;
-	root.Push(n1);
-	Node *n2 = new Node();
-	n2->key = 15;
-	root.Push(n2);
-	n1->left = 0;
-	n1->right = 0;
-	n2->left = 0;
-	n2->right = 0;
-	Node *findnode = new Node;
-	ASSERT_ANY_THROW(findnode = root.FindKey(n, 20));
-}
-
-TEST(BINARY_SEARCH_TREE, throws_when_tree_is_empty_min)
-{
-	Node *n = 0;
-	bst root;
-	Node *min = new Node;
-	ASSERT_ANY_THROW(min = root.FindMin(n));
-}
-
-TEST(BINARY_SEARCH_TREE, throws_when_tree_is_empty_max)
-{
-	Node *n = 0;
-	bst root;
-	Node *max = new Node;
-	ASSERT_ANY_THROW(max = root.FindMax(n));
-}
-
-TEST(BINARY_SEARCH_TREE, throws_when_tree_is_empty_fin_next)
-{
-	Node *n = 0;
-	bst root;
-	Node *next = new Node;
-	ASSERT_ANY_THROW(next = root.FindNext(n));
-}
-
-TEST(BINARY_SEARCH_TREE, throws_when_tree_is_empty_fin_previous)
-{
-	Node *n = 0;
-	bst root;
-	Node *prev = new Node;
-	ASSERT_ANY_THROW(prev = root.FindPrevious(n));
-}
-
-TEST(BINARY_SEARCH_TREE, throws_when_next_node_does_not_exist)
-{
-	Node *n = new Node();
-	bst root;
-	n->parent = 0;
-	n->key = 10;
-	Node *n1 = new Node();
-	n1->key = 5;
-	root.Push(n1);
-	Node *n2 = new Node();
-	n2->key = 15;
-	root.Push(n2);
-	n1->left = 0;
-	n1->right = 0;
-	n2->left = 0;
-	n2->right = 0;
-	Node *next = new Node;
-	ASSERT_ANY_THROW(next = root.FindNext(n2));
-}
-
-TEST(BINARY_SEARCH_TREE, throws_when_previous_node_does_not_exist)
-{
-	Node *n = new Node();
-	bst root;
-	n->parent = 0;
-	n->key = 10;
-	Node *n1 = new Node();
-	n1->key = 5;
-	root.Push(n1);
-	Node *n2 = new Node();
-	n2->key = 15;
-	root.Push(n2);
-	n1->left = 0;
-	n1->right = 0;
-	n2->left = 0;
-	n2->right = 0;
-	Node *prev = new Node;
-	ASSERT_ANY_THROW(prev = root.FindPrevious(n1));
-}
-
-TEST(BINARY_SEARCH_TREE, can_workaround)
-{
-	Node *n = new Node();
-	bst root;
-	n->parent = 0;
-	n->key = 10;
-	Node *n1 = new Node();
-	n1->key = 5;
-	root.Push(n1);
-	Node *n2 = new Node();
-	n2->key = 15;
-	root.Push(n2);
-	n1->left = 0;
-	n1->right = 0;
-	n2->left = 0;
-	n2->right = 0;
-	ASSERT_NO_THROW(root.WorkAroundSearch(n));
+	bst *a = new bst;
+	Node *b = new Node(1);
+	ASSERT_ANY_THROW(a->FindPrevious(a->root, b));
 }

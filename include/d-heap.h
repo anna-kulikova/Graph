@@ -1,41 +1,53 @@
 #pragma once
+
 #include <iostream>
+#include <cmath>
+
+#define MAX_HEAP 10000
 
 using namespace std;
 
 typedef int KeyType;
+ 
+class Priority
+{
+public:
+	KeyType pr;
+};
 
-class D_heap
+ 
+class Dist : public Priority 
+{
+public:
+	int v;
+	Dist(int, KeyType);
+};
+
+ 
+class D_heap 
 {
 private:
-	KeyType *keys;
-	int d;
-	int keysize;
-	int heapsize;
+	int d; 
+	Priority** keys; 
+	int count; 
 public:
 	D_heap(int, int);
+	D_heap(const D_heap&);
 	~D_heap();
-	D_heap(const D_heap &);
-	void Swap(int, int);
-	void SiftDown(int);
-	void SiftUp(int);
-	int MinChild(int);
-	void RemoveMin(void);
-	void RemoveInd(int);
-	void PushKey(const KeyType &);
-	void Heapify(void);
-	int Min(int, int);
-	KeyType D_heap::GetKey(int idx) const;
-	void Sort(void);
-	int GetSize(void) const;
-	int GetHeapSize(void)const {return heapsize;}
-	int operator==(const D_heap &) const;
-	int operator!=(const D_heap &) const;
-	friend ostream& operator<<(ostream& out, const D_heap& heap)
-	{
-		for (int i = 0; i < heap.heapsize; i++)
-			out << heap.keys[i] << " ";
-		return out;
-	}
 
+	int GetParent(int); 
+	void Swap(const int, const int); 
+	void SiftUp(int); 
+	void SiftDown(int); 
+	int MinChild(int); 
+	void RemoveMin(); 
+	void Remove(int); 
+	void Push(KeyType); 
+	void Heapify(); 
+	void GetHeap(); 
+	int operator == (const D_heap&) const;
+	D_heap& operator=(const D_heap&);
+	int GetCount();
+	Priority* GetKey(int); 
+	void Sort(); 
 };

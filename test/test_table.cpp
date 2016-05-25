@@ -1,282 +1,145 @@
-#include "gtest.h"
+#include <gtest.h>
 #include "Table.h"
-#include "Tab_Record.h"
-#include "Scan_Table.h"
-#include "Sort_Table.h"
-#include "Hash_Table.h"
-#include "Array_Hash_Table.h"
+#include "scan_table.h"
+#include "sort_table.h"
+#include "tab_record.h"
 
-
-TEST(TABRECORD, can_create_table)
+TEST(Table, can_create_Table)
 {
-	TabRecord *tab;
-	ASSERT_NO_THROW(tab = new TabRecord(3, "abc"));
+	ASSERT_NO_THROW(ScanTable *a = new ScanTable(5));
 }
 
-TEST(TABRECORD, can_get_key)
+TEST(Table, created_Table_is_empty)
 {
-	TabRecord *tab = new TabRecord(3, "abc");
-	int k;
-	ASSERT_NO_THROW(k = tab->GetKey());
+	ScanTable *a = new ScanTable(5);
+	EXPECT_EQ(1, a->IsEmpty());
 }
 
-TEST(TABRECORD, can_get_data)
+TEST(Table, can_Push_record_to_Table)
 {
-	TabRecord *tab = new TabRecord(3, "abc");
-	char *d;
-	ASSERT_NO_THROW(d = tab->GetData());
+	ScanTable *a = new ScanTable(5);
+	ASSERT_NO_THROW(a->Push(1, 2));
 }
 
-TEST(TABRECORD, get_key_correctly)
+TEST(Table, can_Remove_record_from_Table)
 {
-	TabRecord *tab = new TabRecord(3, "abc");
-	int k = tab->GetKey();
-	EXPECT_EQ(3, k);
+	ScanTable *a = new ScanTable(5);
+	a->Push(1, 2);
+	ASSERT_NO_THROW(a->Remove(1));
 }
 
-TEST(TABRECORD, get_data_correctly)
+TEST(Table, can_Remove_record_from_Table2)
 {
-	TabRecord *tab = new TabRecord(3, "abc");
-	char *d = tab->GetData();
-	EXPECT_EQ("abc", d);
-}
-
-TEST(SCANTABLE, can_create_table_by_size)
-{
-	ASSERT_NO_THROW(ScanTable *tab = new ScanTable(2));
-}
-
-TEST(SCANTABLE, can_create_table)
-{
-	ASSERT_NO_THROW(ScanTable *tab = new ScanTable(1));
-}
-
-TEST(SCANTABLE, can_copy_table)
-{
-	ScanTable s(2);
-	ASSERT_NO_THROW(ScanTable cps(s));
-}
-
-TEST(SCANTABLE, can_search)
-{
-	ScanTable *s = new ScanTable(3);
-	s->Push(1, "a");
-	s->Push(5, "b");
-	TabRecord* t;
-	ASSERT_NO_THROW(t = s->Search(5));
-}
-
-TEST(SCANTABLE, can_push)
-{
-	ScanTable s(2);
-	ASSERT_NO_THROW(s.Push(3, "abc"));
-}
-
-TEST(SCANTABLE, can_remove)
-{
-	ScanTable *s = new ScanTable(3);
-	s->Push(1, "a");
-	s->Push(5, "b");
-	ASSERT_NO_THROW(s->Remove(1));
-}
-
-TEST(SORTTABLE, can_create_table)
-{
-	ASSERT_NO_THROW(SortTable *s = new SortTable(2));
-}
-
-TEST(SORTTABLE, can_copy_table)
-{
-	SortTable s(2);
-	ASSERT_NO_THROW(SortTable cps(s));
-}
-
-TEST(SORTTABLE, can_search)
-{
-	SortTable *s = new SortTable(3);
-	s->Push(1, "a");
-	s->Push(5, "b");
-	TabRecord* t;
-	ASSERT_NO_THROW(t = s->Search(5));
-}
-
-TEST(SORTTABLE, can_push)
-{
-	SortTable s(2);
-	ASSERT_NO_THROW(s.Push(3, "abc"));
-}
-
-TEST(SORTTABLE, can_remove)
-{
-	SortTable *s = new SortTable(2);
-	s->Push(1, "a");
-	s->Push(5, "b");
-	ASSERT_NO_THROW(s->Remove(1));
-}
-
-TEST(SORTTABLE, can_sort)
-{
-	SortTable s(2);
-	ASSERT_NO_THROW(s.SortData());
+	ScanTable *a = new ScanTable(5);
+	a->Push(1, 2);
+	EXPECT_EQ(a->IsEmpty(), 0);
 }
 
 
-//TEST(SCANTABLE, searches_correctly)
-//{
-//	ScanTable s(3);
-//	s.Push(1, "a");
-//	s.Push(2, "b");
-//	s.Push(3, "c");
-//	TabRecord expData(2, "b");
-//	EXPECT_EQ(expData->GetData(), s.Search(2)->GetData());
-//}
 
-
-
-TEST(SCANTABLE, can_get_count)
+TEST(Table, can_find_record)
 {
-	ScanTable s(3);
-	ASSERT_NO_THROW(s.GetCount());
+	ScanTable *a = new ScanTable(5);
+	a->Push(1, 2);
+	a->Push(2, 3);
+	a->Push(3, 4);
+	EXPECT_EQ(a->FindKey(2)->GetData(), 3);
 }
 
-TEST(SCANTABLE, cant_create_table_with_invalid_argument)
+TEST(Table, throws_when_push_to_full_table)
 {
-	ASSERT_ANY_THROW(ScanTable s(-1));
+	ScanTable *a = new ScanTable(5);
+	a->Push(1, 2);
+	a->Push(2, 3);
+	a->Push(3, 4);
+	a->Push(4, 5);
+	a->Push(5, 6);
+	ASSERT_ANY_THROW(a->Push(6, 7));
 }
 
-TEST(SCANTABLE, insert_increases_count)
+TEST(Table, can_check_fullness)
 {
-	ScanTable s(3);
-	s.Push(1, "b");
-	size_t expCount = s.GetCount() + 1;
-	s.Push(2, "a");
-	cout << expCount << " " << s.GetCount();
-	EXPECT_EQ(expCount, s.GetCount());
+	ScanTable *a = new ScanTable(5);
+	a->Push(1, 2);
+	a->Push(2, 3);
+	a->Push(3, 4);
+	a->Push(4, 5);
+	a->Push(5, 6);
+	EXPECT_EQ(a->IsFull(), 1);
 }
 
-TEST(SCANTABLE, cant_insert_record_when_table_is_full)
+TEST(Table, can_get_count)
 {
-	ScanTable s(3);
-	s.Push(1, "a");
-	s.Push(2, "b");
-	s.Push(3, "c");
-	ASSERT_ANY_THROW(s.Push(4, "d"));
+	ScanTable *a = new ScanTable(5);
+	a->Push(1, 2);
+	a->Push(2, 3);
+	a->Push(3, 4);
+	a->Push(4, 5);
+	EXPECT_EQ(a->GetCount(), 4);
 }
 
-TEST(SCANTABLE, removing_decrease_count)
+TEST(Table, throws_when_GoNext_in_full_table)
 {
-	ScanTable s(3);
-	s.Push(1, "a");
-	s.Push(2, "b");
-	s.Push(3, "c");
-	size_t expCount = s.GetCount() - 1;
-	s.Remove(1);
-	EXPECT_EQ(expCount, s.GetCount());
+	ScanTable *a = new ScanTable(5);
+	a->Push(1, 2);
+	a->Push(2, 3);
+	a->Push(3, 4);
+	a->Push(4, 5);
+	a->Push(5, 6);
+	EXPECT_EQ(a->GoNext(), 1);
 }
 
-TEST(SCANTABLE, cant_remove_record_when_table_is_empty)
+TEST(Table, can_create_sorttable)
 {
-	ScanTable s(3);
-	ASSERT_ANY_THROW(s.Remove(1));
+	ASSERT_NO_THROW(SortTable *a = new SortTable(5));
 }
 
-TEST(SCANTABLE, removing_of_non_existing_record_does_not_decrease_count)
+TEST(Table, can_copy_scantable_to_sorttable)
 {
-	ScanTable s(3);
-	s.Push(1, "a");
-	s.Push(2, "b");
-	s.Push(3, "c");
-	size_t expCount = s.GetCount();
-	s.Remove(4);
-	EXPECT_EQ(expCount, s.GetCount());
+	ScanTable *a = new ScanTable(5);
+	ASSERT_NO_THROW(SortTable *b = new SortTable(*a));
 }
 
-TEST(SCANTABLE, search_does_not_change_count)
+TEST(Table, can_FindKey_in_sorttable)
 {
-	ScanTable s(3);
-	s.Push(1, "a");
-	s.Push(2, "b");
-	s.Push(3, "c");
-	size_t expCount = s.GetCount();
-	s.Search(2);
-	EXPECT_EQ(expCount, s.GetCount());
+	SortTable *a = new SortTable(5);
+	a->Push(1, 2);
+	a->Push(2, 3);
+	a->Push(3, 4);
+	a->Push(4, 5);
+	a->Push(5, 6);
+	EXPECT_EQ(a->FindKey(3)->GetData(), 4);
 }
 
-TEST(SCAN_TABLE, search_returns_0_if_record_does_not_exist)
+TEST(Table, can_Remove_in_sorttable)
 {
-	ScanTable s(4);
-	s.Push(1, "a");
-	s.Push(2, "b");
-	s.Push(3, "c");
-	EXPECT_EQ(NULL, s.Search(4));
+	SortTable *a = new SortTable(5);
+	a->Push(1, 2);
+	a->Push(2, 3);
+	a->Push(3, 4);
+	a->Push(4, 5);
+	a->Push(5, 6);
+	ASSERT_NO_THROW(a->Remove(3));
 }
 
-TEST(SCANTABLE, copied_table_is_equal_to_source_one)
+TEST(Table, can_sort_table)
 {
-	ScanTable s(3);
-	s.Push(1, "a");
-	s.Push(2, "b");
-	s.Push(3, "c");
-	ScanTable copyt(s);
-	EXPECT_EQ(s.GetCount(), copyt.GetCount());
+	SortTable *a = new SortTable(5);
+	a->Push(1, 2);
+	a->Push(2, 3);
+	a->Push(3, 4);
+	a->Push(4, 5);
+	a->Push(5, 6);
+	ASSERT_NO_THROW(a->Sort());
 }
 
-//TEST(ARRAYHASHTABLE, can_create_table)
-//{
-//	ASSERT_NO_THROW(Table *ht = new ArrayHashTable(5, 2));
-//}
-//
-//TEST(ARRAYHASHTABLE, can_search)
-//{
-//	ArrayHashTable *ht = new ArrayHashTable(5, 2);
-//	ht->Push(1, "b");
-//	ASSERT_NO_THROW(ht->Search(1));
-//}
-//
-//TEST(ARRAYHASHTABLE, can_push)
-//{
-//	ArrayHashTable *ht = new ArrayHashTable(5, 2);
-//	ASSERT_NO_THROW(ht->Push(1, "b"));
-//}
-//
-//TEST(ARRAYHASHTABLE, can_remove)
-//{
-//	ArrayHashTable *ht = new ArrayHashTable(5, 2);
-//	ht->Push(1, "b");
-//	ASSERT_NO_THROW(ht->Remove(1));
-//}
-//
-//TEST(ARRAYHASHTABLE, can_reset)
-//{
-//	ArrayHashTable *ht = new ArrayHashTable(5, 2);
-//	ht->Push(1, "b");
-//	ASSERT_NO_THROW(ht->Reset());
-//}
-//
-//TEST(ARRAYHASHTABLE, can_get_next)
-//{
-//	ArrayHashTable *ht = new ArrayHashTable(5, 2);
-//	ht->Push(1, "b");
-//	ASSERT_NO_THROW(ht->GetNext());
-//}
-//
-//TEST(ARRAYHASHTABLE, insert_increases_count)
-//{
-//	ArrayHashTable ht(3, 1);
-//	size_t expCount = ht.GetCount() + 1;
-//	ht.Push(1, "b");
-//	EXPECT_EQ(expCount, ht.GetCount());
-//}
-//
-//TEST(ARRAYHASHTABLE, remove_decreases_count)
-//{
-//	ArrayHashTable ht(3, 1);
-//	ht.Push(1, "a");
-//	ht.Push(2, "b");
-//	ht.Push(3, "c");
-//	size_t expCount = ht.GetCount() - 1;
-//	ht.Remove(1);
-//	EXPECT_EQ(expCount, ht.GetCount());
-//}
-//
-//
+TEST(Table, can_getmin)
+{
+	SortTable *a = new SortTable(5);
+	a->Push(1, 2);
+	a->Push(2, 3);
+	a->Push(3, 4);
+	a->Push(4, 5);
+	a->Push(5, 6);
+	EXPECT_EQ(a->Min()->GetData(), 2);
+}

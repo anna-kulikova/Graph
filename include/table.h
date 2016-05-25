@@ -9,18 +9,19 @@ using namespace std;
 class Table
 {
 protected:
-	int size;
-	int count;
+	int size; 
+	int count; 
 	int pos;
 public:
-	Table(int);
-	virtual TabRecord* Search(KeyType) = 0;
-	virtual void Push(KeyType, DataType*) = 0;
-	virtual void Remove(KeyType) = 0;
-	int IsEmpty(void) const;
-	int IsFull(void) const;
-	int GetCount(void) const;
-	virtual void Reset(void);
-	virtual int GetNext(void);
-	virtual int IsTabEnded(void) const;
+	Table(KeyType);
+	virtual TabRecord* FindKey(KeyType) = 0;
+	virtual void Push(KeyType, DataType) = 0;
+	virtual void Remove(KeyType) = 0; 
+	int	IsEmpty();
+	int	IsFull(); 
+	virtual int GetCount(); 
+	virtual void Reset(); 
+	virtual int	GoNext(); 
+	virtual int IsTabEnded();
 };
+

@@ -1,20 +1,27 @@
 #pragma once
 #include "table.h"
 
-class ScanTable :public Table
+class ScanTable : public Table
 {
 protected:
-	TabRecord **recs;
+	TabRecord** recs;
 public:
-	ScanTable(int);
-	ScanTable(const ScanTable& table) : ScanTable(table.size) {
-		count = table.count;
-		for (size_t i = 0; i < table.count; i++)
-			recs[i] = new TabRecord(table.recs[i]->GetKey(), table.recs[i]->GetData());
-	};
-	~ScanTable();
-	virtual TabRecord* Search(KeyType);
-	virtual void Push(KeyType, DataType*);
-	virtual void Remove(KeyType);
-	friend class SortTable;
+	ScanTable(int size) : Table(size)
+	{
+		recs = new TabRecord*[size];
+		for (int i = 0; i<size; i++)
+		{
+			recs[i] = NULL;
+		}
+	}
+	virtual ~ScanTable();
+	virtual TabRecord* FindKey(KeyType k);
+	virtual void Push(KeyType k, DataType Data);
+	virtual void Remove(KeyType k);
+	void Print();
+	virtual int GetCount();
+	int GetSize();
+	TabRecord** GetRecs();
 };
+
+

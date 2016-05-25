@@ -1,41 +1,55 @@
-#pragma once
-
 #include <iostream>
 #include <queue>
+#include <stack>
 
 using namespace std;
 
 typedef int KeyType;
-struct Node
-{
-	KeyType key;
-	Node *left;
-	Node *right;
-	Node *parent;
 
-	Node(void) : left(NULL), right(NULL), parent(NULL) {}
-	Node(const KeyType& data) : key(data), left(NULL), right(NULL), parent(NULL) {}
+class Node
+{
+public:
+	int balance; 
+	KeyType key; 
+	Node *left; 
+	Node *right; 
+	Node *parent; 
+	Node()
+	{ 
+		left = NULL;
+		right = NULL; 
+		parent = NULL;
+		balance = 0;
+	}
+	Node(const KeyType& k)
+	{ 
+		key = k;
+		left = NULL;
+		right = NULL;
+		parent = NULL;
+		balance = 0; 
+	}
 };
 
-class bst {
-	Node* root;
-	Node* Copy(Node *node);
-	void recursiveRemove(Node*);
+
+class bst
+{
 public:
-	bst() {}
-	bst(const bst& tree) { root = Copy(tree.root);}
-	~bst(void) { recursiveRemove(root);}
-
-	Node* GetRoot (void)const {return root;}
-	Node * FindKey(Node *root, int k);
-	Node * FindMin(Node *root);
-	Node * FindMax(Node *root);
-	Node * FindNext(Node *node);
-	Node * FindPrevious(Node *node);
-
-	void Push(Node *node);
-	void Remove(KeyType k);
-	void WorkAroundSearch(Node *node);
-
+	int size; 
+	Node *root;
+	bst();
+	~bst();
+	bst(const bst &);
+	Node* Copy(Node*); 
+	virtual void Push(Node*&, const Node *); 
+	virtual void Remove(Node*&, const KeyType &); 
+	Node* FindKey(Node*, const KeyType &); 
+	Node* FindMax(Node*); 
+	Node* FindMin(Node*); 
+	Node* FindNext(Node*, Node*); 
+	Node* FindPrevious(Node*, Node*);
+	int operator==(const bst&) const;
+	int GetSize();
+	int GetHeight(Node*);
 };
 
