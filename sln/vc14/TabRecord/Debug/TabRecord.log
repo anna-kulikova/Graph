@@ -1,0 +1,13 @@
+﻿Сборка начата 15.04.2016 10:48:36.
+     1>Проект "C:\Users\Anna\Documents\Учеба\Программирование\Table\sln\vc14\TabRecord\TabRecord.vcxproj" в узле 2 (целевые объекты Rebuild).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /I../../../include /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\TabRecord.pdb" /Gd /TP /analyze- /errorReport:prompt ..\..\..\src\TabRecord.cpp
+         TabRecord.cpp
+       Lib:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\Lib.exe /OUT:"C:\Users\Anna\Documents\Учеба\Программирование\Table\sln\vc14\Debug\TabRecord.lib" /NOLOGO Debug\TabRecord.obj
+         TabRecord.vcxproj -> C:\Users\Anna\Documents\Учеба\Программирование\Table\sln\vc14\Debug\TabRecord.lib
+     1>Сборка проекта "C:\Users\Anna\Documents\Учеба\Программирование\Table\sln\vc14\TabRecord\TabRecord.vcxproj" завершена (целевые объекты Rebuild).
+
+Сборка успешно завершена.
+
+Затраченное время: 00:00:00.87

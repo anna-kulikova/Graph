@@ -1,0 +1,13 @@
+﻿Сборка начата 26.05.2016 22:28:17.
+     1>Проект "C:\Users\Anna\Documents\Учеба\Программирование\Graph\sln\vc14\Table\Table.vcxproj" в узле 2 (целевые объекты Build).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /I../../../include /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\Table.pdb" /Gd /TP /analyze- /errorReport:prompt ..\..\..\src\table.cpp
+         table.cpp
+       Lib:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\Lib.exe /OUT:"C:\Users\Anna\Documents\Учеба\Программирование\Graph\sln\vc14\Debug\Table.lib" /NOLOGO Debug\table.obj
+         Table.vcxproj -> C:\Users\Anna\Documents\Учеба\Программирование\Graph\sln\vc14\Debug\Table.lib
+     1>Сборка проекта "C:\Users\Anna\Documents\Учеба\Программирование\Graph\sln\vc14\Table\Table.vcxproj" завершена (целевые объекты Build).
+
+Сборка успешно завершена.
+
+Затраченное время: 00:00:01.73

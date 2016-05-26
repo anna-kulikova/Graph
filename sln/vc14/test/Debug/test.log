@@ -1,0 +1,33 @@
+﻿Сборка начата 25.05.2016 15:38:20.
+     1>Проект "C:\Users\Anna\Documents\Учеба\Программирование\Graph\sln\vc14\test\test.vcxproj" в узле 5 (целевые объекты Build).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /I../../../include /I../../../gtest /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt "..\..\..\test\test-queue.cpp" ..\..\..\test\test_graph.cpp ..\..\..\test\test_heap.cpp ..\..\..\test\test_main.cpp ..\..\..\test\test_set.cpp ..\..\..\test\test_table.cpp ..\..\..\test\test_tree.cpp
+         test_tree.cpp
+         test_table.cpp
+         test_set.cpp
+         test_main.cpp
+         test_heap.cpp
+         test_graph.cpp
+         test-queue.cpp
+         Создание кода...
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Anna\Documents\Учеба\Программирование\Graph\sln\vc14\Debug\test.exe" /INCREMENTAL /NOLOGO /LIBPATH:../Debug Table.lib Graph.lib "Binary Tree.lib" "D-Heap.lib" "Disjoint Set.lib" "Priority Queue.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"C:\Users\Anna\Documents\Учеба\Программирование\Graph\sln\vc14\Debug\test.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Anna\Documents\Учеба\Программирование\Graph\sln\vc14\Debug\test.lib" /MACHINE:X86 "Debug\test-queue.obj"
+         Debug\test_graph.obj
+         Debug\test_heap.obj
+         Debug\test_main.obj
+         Debug\test_set.obj
+         Debug\test_table.obj
+         Debug\test_tree.obj
+         "C:\Users\Anna\Documents\Учеба\Программирование\Graph\sln\vc14\Debug\Binary Tree.lib"
+         "C:\Users\Anna\Documents\Учеба\Программирование\Graph\sln\vc14\Debug\Disjoint Set.lib"
+         "C:\Users\Anna\Documents\Учеба\Программирование\Graph\sln\vc14\Debug\D-Heap.lib"
+         "C:\Users\Anna\Documents\Учеба\Программирование\Graph\sln\vc14\Debug\Graph.lib"
+         "C:\Users\Anna\Documents\Учеба\Программирование\Graph\sln\vc14\Debug\gtest.lib"
+         "C:\Users\Anna\Documents\Учеба\Программирование\Graph\sln\vc14\Debug\Table.lib"
+         "C:\Users\Anna\Documents\Учеба\Программирование\Graph\sln\vc14\Debug\Priority Queue.lib"
+         test.vcxproj -> C:\Users\Anna\Documents\Учеба\Программирование\Graph\sln\vc14\Debug\test.exe
+     1>Сборка проекта "C:\Users\Anna\Documents\Учеба\Программирование\Graph\sln\vc14\test\test.vcxproj" завершена (целевые объекты Build).
+
+Сборка успешно завершена.
+
+Затраченное время: 00:00:12.43

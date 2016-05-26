@@ -1,0 +1,13 @@
+﻿Сборка начата 26.05.2016 22:30:28.
+     1>Проект "C:\Users\Anna\Documents\Учеба\Программирование\Graph\sln\vc14\Graph\Graph.vcxproj" в узле 3 (целевые объекты Build).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /I../../../include /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\Graph.pdb" /Gd /TP /analyze- /errorReport:prompt ..\..\..\src\graph.cpp
+         graph.cpp
+       Lib:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\Lib.exe /OUT:"C:\Users\Anna\Documents\Учеба\Программирование\Graph\sln\vc14\Debug\Graph.lib" /NOLOGO Debug\graph.obj
+         Graph.vcxproj -> C:\Users\Anna\Documents\Учеба\Программирование\Graph\sln\vc14\Debug\Graph.lib
+     1>Сборка проекта "C:\Users\Anna\Documents\Учеба\Программирование\Graph\sln\vc14\Graph\Graph.vcxproj" завершена (целевые объекты Build).
+
+Сборка успешно завершена.
+
+Затраченное время: 00:00:02.28

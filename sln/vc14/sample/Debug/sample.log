@@ -1,0 +1,17 @@
+﻿Сборка начата 26.05.2016 11:07:55.
+     1>Проект "C:\Users\Anna\Documents\Учеба\Программирование\Graph\sln\vc14\sample\sample.vcxproj" в узле 2 (целевые объекты Build).
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (sample.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+     1>Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Anna\Documents\Учеба\Программирование\Graph\sln\vc14\Debug\sample-Dijkstra.exe" /INCREMENTAL /NOLOGO /LIBPATH:../Debug "Binary Tree.lib" Table.lib "D-Heap.lib" "Disjoint Set.lib" "Priority Queue.lib" Graph.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"C:\Users\Anna\Documents\Учеба\Программирование\Graph\sln\vc14\Debug\sample-Dijkstra.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Anna\Documents\Учеба\Программирование\Graph\sln\vc14\Debug\sample-Dijkstra.lib" /MACHINE:X86 Debug\sample_Dijkstra.obj
+         "C:\Users\Anna\Documents\Учеба\Программирование\Graph\sln\vc14\Debug\Binary Tree.lib"
+         "C:\Users\Anna\Documents\Учеба\Программирование\Graph\sln\vc14\Debug\Disjoint Set.lib"
+         "C:\Users\Anna\Documents\Учеба\Программирование\Graph\sln\vc14\Debug\D-Heap.lib"
+         "C:\Users\Anna\Documents\Учеба\Программирование\Graph\sln\vc14\Debug\Table.lib"
+         "C:\Users\Anna\Documents\Учеба\Программирование\Graph\sln\vc14\Debug\Priority Queue.lib"
+     1>LINK : fatal error LNK1168: не удается открыть C:\Users\Anna\Documents\Учеба\Программирование\Graph\sln\vc14\Debug\sample-Dijkstra.exe для записи
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppCommon.targets(630,5): error MSB6006: "link.exe" завершилась с кодом 1168.
+     1>Сборка проекта "C:\Users\Anna\Documents\Учеба\Программирование\Graph\sln\vc14\sample\sample.vcxproj" завершена (целевые объекты Build) с ошибкой.
+
+Ошибка сборки.
+
+Затраченное время: 00:00:02.35

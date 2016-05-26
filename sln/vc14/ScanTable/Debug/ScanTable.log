@@ -1,0 +1,13 @@
+﻿Сборка начата 29.04.2016 10:13:41.
+     1>Проект "C:\Users\Anna\Documents\Учеба\Программирование\Table\sln\vc14\ScanTable\ScanTable.vcxproj" в узле 2 (целевые объекты Build).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /I../../../include /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\ScanTable.pdb" /Gd /TP /analyze- /errorReport:prompt ..\..\..\src\ScanTable.cpp
+         ScanTable.cpp
+       Lib:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\Lib.exe /OUT:"C:\Users\Anna\Documents\Учеба\Программирование\Table\sln\vc14\Debug\ScanTable.lib" /NOLOGO Debug\ScanTable.obj
+         ScanTable.vcxproj -> C:\Users\Anna\Documents\Учеба\Программирование\Table\sln\vc14\Debug\ScanTable.lib
+     1>Сборка проекта "C:\Users\Anna\Documents\Учеба\Программирование\Table\sln\vc14\ScanTable\ScanTable.vcxproj" завершена (целевые объекты Build).
+
+Сборка успешно завершена.
+
+Затраченное время: 00:00:02.03

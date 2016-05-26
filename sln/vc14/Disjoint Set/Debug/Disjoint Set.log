@@ -1,0 +1,19 @@
+﻿Сборка начата 26.05.2016 21:58:43.
+     1>Проект "C:\Users\Anna\Documents\Учеба\Программирование\Graph\sln\vc14\Disjoint Set\Disjoint Set.vcxproj" в узле 2 (целевые объекты Build).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /I../../../include /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\Disjoint Set.pdb" /Gd /TP /analyze- /errorReport:prompt ..\..\..\src\disjoint_set.cpp
+         disjoint_set.cpp
+     1>c:\program files (x86)\microsoft visual studio 14.0\vc\include\deque(1407): error C2059: синтаксическая ошибка: константа
+         c:\program files (x86)\microsoft visual studio 14.0\vc\include\deque(1923): note: см. ссылку на создание экземпляров класса шаблон при компиляции "std::deque<_Ty,_Alloc>"
+     1>c:\program files (x86)\microsoft visual studio 14.0\vc\include\deque(1408): error C2334: непредвиденные лексемы перед "{"; пропуск вероятного тела функции
+     1>c:\program files (x86)\microsoft visual studio 14.0\vc\include\vector(1182): error C2059: синтаксическая ошибка: константа
+         c:\program files (x86)\microsoft visual studio 14.0\vc\include\vector(1815): note: см. ссылку на создание экземпляров класса шаблон при компиляции "std::vector<_Ty,_Alloc>"
+     1>c:\program files (x86)\microsoft visual studio 14.0\vc\include\vector(1183): error C2334: непредвиденные лексемы перед "{"; пропуск вероятного тела функции
+     1>c:\program files (x86)\microsoft visual studio 14.0\vc\include\vector(2712): error C2059: синтаксическая ошибка: константа
+         c:\program files (x86)\microsoft visual studio 14.0\vc\include\vector(3042): note: см. ссылку на создание экземпляров класса шаблон при компиляции "std::vector<bool,_Alloc>"
+     1>c:\program files (x86)\microsoft visual studio 14.0\vc\include\vector(2713): error C2334: непредвиденные лексемы перед "{"; пропуск вероятного тела функции
+     1>Сборка проекта "C:\Users\Anna\Documents\Учеба\Программирование\Graph\sln\vc14\Disjoint Set\Disjoint Set.vcxproj" завершена (целевые объекты Build) с ошибкой.
+
+Ошибка сборки.
+
+Затраченное время: 00:00:05.06
