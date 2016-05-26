@@ -1,0 +1,16 @@
+﻿Сборка начата 26.05.2016 22:34:10.
+     1>Проект "C:\Users\Anna\Documents\Учеба\Программирование\Graph\sln\vc14\sample-Kruskal\sample-Kruskal.vcxproj" в узле 2 (целевые объекты Build).
+     1>Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Anna\Documents\Учеба\Программирование\Graph\sln\vc14\Debug\sample-Kruskal.exe" /INCREMENTAL /NOLOGO /LIBPATH:../Debug Kruskal.lib Table.lib "D-Heap.lib" "Binary Tree.lib" "Disjoint Set.lib" "Priority Queue.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"C:\Users\Anna\Documents\Учеба\Программирование\Graph\sln\vc14\Debug\sample-Kruskal.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Anna\Documents\Учеба\Программирование\Graph\sln\vc14\Debug\sample-Kruskal.lib" /MACHINE:X86 Debug\sample_Kruskal.obj
+         "C:\Users\Anna\Documents\Учеба\Программирование\Graph\sln\vc14\Debug\Binary Tree.lib"
+         "C:\Users\Anna\Documents\Учеба\Программирование\Graph\sln\vc14\Debug\D-Heap.lib"
+         "C:\Users\Anna\Documents\Учеба\Программирование\Graph\sln\vc14\Debug\Graph.lib"
+         "C:\Users\Anna\Documents\Учеба\Программирование\Graph\sln\vc14\Debug\Kruskal.lib"
+         "C:\Users\Anna\Documents\Учеба\Программирование\Graph\sln\vc14\Debug\Table.lib"
+         "C:\Users\Anna\Documents\Учеба\Программирование\Graph\sln\vc14\Debug\Priority Queue.lib"
+         sample-Kruskal.vcxproj -> C:\Users\Anna\Documents\Учеба\Программирование\Graph\sln\vc14\Debug\sample-Kruskal.exe
+     1>Сборка проекта "C:\Users\Anna\Documents\Учеба\Программирование\Graph\sln\vc14\sample-Kruskal\sample-Kruskal.vcxproj" завершена (целевые объекты Build).
+
+Сборка успешно завершена.
+
+Затраченное время: 00:00:03.56
